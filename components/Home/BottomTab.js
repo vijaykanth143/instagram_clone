@@ -22,7 +22,7 @@ export const bottomTabIcons = [
     inactive: inactivesearch,
   },
   {
-    name: 'Home',
+    name: 'Reels',
     active: activereels,
     inactive: inactivereels,
   },
@@ -41,7 +41,16 @@ const BottomTab = ({icons}) => {
   const [activetabs, setActivetabs] = useState('Home');
   const Icon = ({icon}) => (
     <TouchableOpacity onPress={() => setActivetabs(icon.name)}>
-      <Image source={icon.inactive} style={styles.icon} />
+      <Image
+        source={activetabs === icon.name ? icon.active : icon.inactive}
+        style={[
+          styles.icon,
+          icon.name === 'Profile' ? styles.profielPic() : null,
+          activetabs === 'Profile' && icon.name === activetabs
+            ? styles.profielPic(activetabs)
+            : null,
+        ]}
+      />
     </TouchableOpacity>
   );
   return (
@@ -70,4 +79,10 @@ const styles = StyleSheet.create({
     height: 50,
     paddingTop: 10,
   },
+  profielPic: (activetabs = '') => ({
+    borderRadius: 50,
+    borderWidth: activetabs === 'Profile' ? 2 : 0,
+    borderColor: activetabs === 'Profile' ? 'White' : null,
+    backgroundColor: '#fff',
+  }),
 });
