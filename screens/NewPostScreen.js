@@ -3,11 +3,11 @@ import React from 'react';
 import AddNewPost from '../components/NewPost/AddNewPost';
 import FormikPost from '../components/NewPost/FormikPost';
 
-const NewPostScreen = () => {
+const NewPostScreen = ({navigation}) => {
   return (
     <SafeAreaView style={{backgroundColor: 'black', flex: 1}}>
-      <AddNewPost />
-      <FormikPost />
+      <AddNewPost navigation={navigation} />
+      <FormikPost navigation={navigation} />
     </SafeAreaView>
   );
 };

@@ -4,7 +4,7 @@ import vijaypost1 from '../assets/vijaypost2.jpg';
 import vijaypost2 from '../assets/sam.jpg';
 export const POSTS = [
   {
-    imageUrl: vijaypost1,
+    imageUrl: 'https://i.ibb.co/WsPsPqq/vijaypost2.jpg',
     user: USERS[0].user,
     likes: 784,
     caption: 'Stay happy 😊',
@@ -17,7 +17,7 @@ export const POSTS = [
     ],
   },
   {
-    imageUrl: vijaypost2,
+    imageUrl: 'https://i.ibb.co/GFxymkh/sam.jpg',
     user: USERS[4].user,
     likes: 800,
     caption: 'Happy Birthday ra bava🤩',

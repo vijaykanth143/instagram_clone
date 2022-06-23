@@ -46,7 +46,7 @@ const PostHeader = ({post}) => (
 const PostImage = ({post}) => (
   <View>
     <Image
-      source={post.imageUrl}
+      source={{uri: post.imageUrl}}
       style={{width: 360, height: 350, resizeMode: 'cover'}}
     />
   </View>

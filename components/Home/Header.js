@@ -5,14 +5,14 @@ import Icon from 'react-native-vector-icons/Feather';
 import like from '../../assets/Likewhite.png';
 import plus from '../../assets/pluswhite.png';
 import messenger from '../../assets/messenger.png';
-const Header = () => {
+const Header = ({navigation}) => {
   return (
     <View style={styles.container}>
       <TouchableOpacity>
         <Image style={styles.logo} source={header} />
       </TouchableOpacity>
       <View style={styles.iconsContainer}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.push('NewPost')}>
           <Image source={plus} style={styles.icon} />
         </TouchableOpacity>
         <TouchableOpacity>

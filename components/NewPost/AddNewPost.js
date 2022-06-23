@@ -1,21 +1,21 @@
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import back from '../../assets/back.png';
-const AddNewPost = () => {
+const AddNewPost = ({navigation}) => {
   return (
     <View style={styles.container}>
-      <Header />
+      <Header navigation={navigation} />
     </View>
   );
 };
-const Header = () => (
+const Header = ({navigation}) => (
   <View style={styles.headerContainer}>
-    <TouchableOpacity>
+    <TouchableOpacity onPress={() => navigation.goBack()}>
       <Image source={back} style={{height: 30, width: 30}} />
     </TouchableOpacity>
 
     <Text style={styles.headerText}>NEW POST</Text>
- <Text></Text>
+    <Text></Text>
   </View>
 );
 export default AddNewPost;
