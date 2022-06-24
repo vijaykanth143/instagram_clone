@@ -4,11 +4,21 @@ import header from '../../assets/header-logo.png';
 import Icon from 'react-native-vector-icons/Feather';
 import like from '../../assets/Likewhite.png';
 import plus from '../../assets/pluswhite.png';
+import {auth} from '../../firebase';
 import messenger from '../../assets/messenger.png';
+
 const Header = ({navigation}) => {
+  const handleSignOut = async () => {
+    try {
+      await auth.signOut();
+      console.log('signedOut successfully');
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <View style={styles.container}>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={handleSignOut}>
         <Image style={styles.logo} source={header} />
       </TouchableOpacity>
       <View style={styles.iconsContainer}>

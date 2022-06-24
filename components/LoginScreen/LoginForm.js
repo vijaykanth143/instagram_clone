@@ -8,14 +8,14 @@ import {
   Alert,
 } from 'react-native';
 import React, {useState} from 'react';
-import {getAuth, signInWithEmailAndPassword} from 'firebase/auth';
+import {signInWithEmailAndPassword} from 'firebase/auth';
+import {auth} from '../../firebase';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
 
 import Validator from 'email-validator';
 
 const LoginForm = ({navigation}) => {
-  const auth = getAuth();
   const LoginFormSchema = Yup.object().shape({
     email: Yup.string().email().required('An email is required'),
     password: Yup.string()
@@ -24,22 +24,11 @@ const LoginForm = ({navigation}) => {
   });
   const onLogin = (email, Password) => {
     signInWithEmailAndPassword(auth, email, Password)
-      .then(response => {
-        console.log(response.user);
+      .then(() => {
+        console.log('succesfully logedin');
       })
       .catch(error => {
-        Alert.alert(
-          'My Lord....',
-          error.message + '\n\n ... what would you look to do next...',
-          [
-            {
-              text: 'OK',
-              onPress: () => console.log('OK'),
-              style: 'cancel',
-            },
-            {text: 'Sign Up', onPress: () => navigation.push('SignupScreen')},
-          ],
-        );
+        console.log(error.message);
       });
   };
   return (

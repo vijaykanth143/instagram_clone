@@ -11,14 +11,18 @@ import {
 import React, {useState} from 'react';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
-import {getAuth, createUserWithEmailAndPassword} from 'firebase/auth';
+import {auth, db} from '../../firebase';
+import {
+  addDoc,
+  collection,
+  getFirestore,
+  doc,
+  setDoc,
+} from 'firebase/firestore';
+import {createUserWithEmailAndPassword} from 'firebase/auth';
 import Validator from 'email-validator';
-import {database} from '../../App';
-import {collection, addDoc, getFirestore} from 'firebase/firestore';
-import {initializeApp} from 'firebase/app';
+
 const SignUpForm = ({navigation}) => {
-  const auth = getAuth();
-  const collectionref = collection(database, 'users');
   const SignUpFormSchema = Yup.object().shape({
     email: Yup.string().email().required('An email is required'),
     username: Yup.string().required().min(2, 'A username is required'),
@@ -35,18 +39,20 @@ const SignUpForm = ({navigation}) => {
 
   const onSignUP = async (email, password, username) => {
     try {
-      addDoc(collection(database, 'users'), {
-        owner_uid: Math.random(),
+      const authUser = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password,
+      );
+      const docRef = await addDoc(collection(db, 'Profiles'), {
+        owner_id: authUser.user.uid,
         username: username,
-        email: email,
+        email: authUser.user.email,
         profile_picture: await getRandomuser(),
-      }).then(() => {
-        Alert.alert('Data Added');
       });
-
-      console.log('succesfully added');
-    } catch (error) {
-      Alert.alert(error.message[{text: 'okay', style: 'destructive'}]);
+      console.log('Document written with ID: ', docRef.id);
+    } catch (e) {
+      console.error('Error adding document: ', e);
     }
   };
   return (

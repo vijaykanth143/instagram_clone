@@ -17,33 +17,16 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
-import {getFirestore} from 'firebase/firestore';
+import {getFirestore} from 'firebase/database';
 import {initializeApp} from 'firebase/app';
+
 import SignedInStack from './Navigation';
 import HomeScreen from './screens/HomeScreen';
 import NewPostScreen from './screens/NewPostScreen';
-const firebaseConfig = {
-  apiKey: 'AIzaSyA3_oO5uELHS2_BzKyA62DpQ7Gd0tRl6bM',
-  authDomain: 'rn-instagram-clone-6bf5e.firebaseapp.com',
-  projectId: 'rn-instagram-clone-6bf5e',
-  storageBucket: 'rn-instagram-clone-6bf5e.appspot.com',
-  messagingSenderId: '887368227064',
-  appId: '1:887368227064:web:76e368d006075666c9430d',
-};
+import AuthNavigation from './AuthNavigation';
 
-export const database = getFirestore(initializeApp(firebaseConfig));
 const App = () => {
-  const firebaseConfig = {
-    apiKey: 'AIzaSyA3_oO5uELHS2_BzKyA62DpQ7Gd0tRl6bM',
-    authDomain: 'rn-instagram-clone-6bf5e.firebaseapp.com',
-    projectId: 'rn-instagram-clone-6bf5e',
-    storageBucket: 'rn-instagram-clone-6bf5e.appspot.com',
-    messagingSenderId: '887368227064',
-    appId: '1:887368227064:web:76e368d006075666c9430d',
-  };
-  initializeApp(firebaseConfig);
-
-  return <SignedInStack />;
+  return <AuthNavigation />;
 };
 
 const styles = StyleSheet.create({
